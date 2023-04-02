@@ -17,6 +17,10 @@ def indirect(value):
 
 
 class TestParser(unittest.TestCase):
+    '''
+    Tests if human-readable program is correctly translated to instructions
+    '''
+
     def test_empty_program_has_no_instructions(self):
         program = ''
         instructions = parse_program(program)
@@ -54,7 +58,6 @@ class TestParser(unittest.TestCase):
         ]
         self.assertEqual(instructions, expected)
 
-
     def test_immediate_address_mode(self):
         program = 'inc .1'
         instructions = parse_program(program)
@@ -73,8 +76,63 @@ class TestParser(unittest.TestCase):
         expected = [Instruction(InstructionType.INC, [indirect(1)])]
         self.assertEqual(instructions, expected)
 
+    def test_jzero_contains_label_address(self):
+        program = """
+        label foo
+        jzero .0 foo
+        """
+        instructions = parse_program(program)
+        expected = [Instruction(InstructionType.JZERO, [
+                                immediate(0), immediate(0)])]
+        self.assertEqual(instructions, expected)
+
+    def test_jzero_contains_label_address_multiple_labels(self):
+        program = """
+        label FOO
+        label BAR
+        label foo
+        jzero .0 foo
+        """
+        instructions = parse_program(program)
+        expected = [Instruction(InstructionType.JZERO, [
+                                immediate(0), immediate(0)])]
+        self.assertEqual(instructions, expected)
+
+    def test_jzero_contains_label_address_in_the_middle(self):
+        program = """
+        inc @0
+        label foo
+        jzero .0 foo
+        """
+        instructions = parse_program(program)
+        expected = [
+            Instruction(InstructionType.INC, [direct(0)]),
+            Instruction(InstructionType.JZERO, [
+                immediate(0), immediate(1)]),
+        ]
+        self.assertEqual(instructions, expected)
+
+    def test_jnzero_contains_label_address(self):
+        program = """
+        label foo
+        jnzero .0 foo
+        """
+        instructions = parse_program(program)
+        expected = [Instruction(InstructionType.JNZERO, [
+                                immediate(0), immediate(0)])]
+        self.assertEqual(instructions, expected)
+
 
 class TestMachine(unittest.TestCase):
+    '''
+    Tests if executing set of instructions gives correct results
+    '''
+
+    def test_empty_programs_has_no_output(self):
+        program = ""
+        result = execute_program(program)
+        self.assertEqual(result, "")
+
     def test_memory_starts_filled_with_zeros(self):
         program = """
         print @0
@@ -114,6 +172,14 @@ class TestMachine(unittest.TestCase):
         result = execute_program(program)
         self.assertEqual(result, '1\n')
 
+    def test_incrementing_immediate_addres_does_nothing(self):
+        program = """
+        inc .0
+        print @0
+        """
+        result = execute_program(program)
+        self.assertEqual(result, '0\n')
+
     def test_direct_address_mode_returns_value_from_memory(self):
         program = """
         inc @0
@@ -150,7 +216,6 @@ class TestMachine(unittest.TestCase):
         """
         result = execute_program(program)
         self.assertEqual(result, '0\n0\n')
-
 
     def jnzero_jumps_to_label_if_value_is_not_zero(self):
         program = """
