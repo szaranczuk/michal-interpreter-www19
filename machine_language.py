@@ -21,6 +21,7 @@ class InstructionType(Enum):
     PRINT = auto()
     JZERO = auto()
     JNZERO = auto()
+    SCAN = auto()
 
 @dataclass
 class Instruction:

@@ -1,12 +1,9 @@
-# www19-quals
+# Michalang interpreter
 
-Testy do zadania 1 warsztatów "Napiszmy sobie Interpreter" na WWW19
+### Usage
+```
+./michalang.sh [path_to_file]
+```
+### Examples
 
-### uruchamianie
-```
-python3 -m unittest test_machine.py
-```
-Dla wygody dołączony jest skrypt `test.sh` (może nie działać na Windowsie)
-```
-./test.sh
-```
+Example programs are in `example_programs` directory

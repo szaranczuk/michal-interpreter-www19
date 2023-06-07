@@ -1,0 +1,1 @@
+python michalang_interpret.py ${1}

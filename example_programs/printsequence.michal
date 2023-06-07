@@ -1,0 +1,10 @@
+label input
+inc @0
+scan *0
+jnzero *0 input
+dec @0
+label output
+print *0
+dec @0
+jnzero @0 output
+stop
