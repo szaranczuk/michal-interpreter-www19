@@ -35,7 +35,7 @@ class TestParser(unittest.TestCase):
     def test_empty_lines_are_ignored(self):
         program = """
         inc .1
-
+        
         inc .2
         """
         instructions = parse_program(program)
@@ -43,6 +43,7 @@ class TestParser(unittest.TestCase):
             Instruction(InstructionType.INC, [immediate(1)]),
             Instruction(InstructionType.INC, [immediate(2)])
         ]
+        print(instructions)
         self.assertEqual(instructions, expected)
 
     def test_labels_are_ignored(self):
