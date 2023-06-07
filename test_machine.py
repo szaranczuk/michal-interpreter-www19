@@ -43,7 +43,6 @@ class TestParser(unittest.TestCase):
             Instruction(InstructionType.INC, [immediate(1)]),
             Instruction(InstructionType.INC, [immediate(2)])
         ]
-        print(instructions)
         self.assertEqual(instructions, expected)
 
     def test_labels_are_ignored(self):
