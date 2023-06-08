@@ -1,0 +1,21 @@
+scan @200
+scan @201
+label first
+dec @200
+inc @202
+jnzero @200 first
+label second
+jzero @202 second_greater
+dec @201
+dec @202
+jnzero @201 second
+jzero @202 equal
+print .1
+stop
+label equal
+print .0
+stop
+label second_greater
+print .2
+stop
+

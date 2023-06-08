@@ -1,0 +1,315 @@
+#preprocessing 
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+inc @190
+
+
+#input reading
+scan @200
+label input
+scan *200
+inc @201
+dec @200
+jnzero @200 input
+
+#insertion sort
+label main_sort
+jzero @201 stop
+dec @201
+inc @200
+inc @202
+inc @203
+inc @204
+inc @205
+inc @206
+inc @207
+inc @208
+inc @209
+inc @210
+inc @211
+inc @212
+inc @213
+inc @214
+inc @215
+inc @216
+inc @217
+inc @218
+inc @219
+inc @220
+inc @221
+inc @222
+inc @223
+inc @224
+inc @225
+inc @226
+inc @227
+inc @228
+inc @229
+inc @230
+inc @190
+
+label inner_loop
+label first
+dec *200
+inc @150
+inc @151
+jnzero *200 first
+dec @200
+jzero @200 dont_swap
+label second
+jzero @151 dont_swap
+dec *200
+inc @152
+dec @151 
+jnzero *200 second
+jzero @151 dont_swap
+jzero .0 swap
+
+label dont_swap
+label clear_151_1
+jzero @151 clear_151_1_end
+dec @151
+jzero .0 clear_151_1
+label clear_151_1_end
+jzero @152 dont_swap_second
+dec @152
+inc *200
+jzero .0 dont_swap
+label dont_swap_second
+inc @200
+label dont_swap_second_rep
+jzero @150 restore_200
+dec @150
+inc *200
+jzero .0 dont_swap_second_rep
+
+label restore_200
+jzero @200 paste_to_200
+dec @200
+jzero .0 restore_200
+label paste_to_200
+dec *190
+inc @200
+jnzero *190 paste_to_200
+jzero .0 main_sort
+
+label swap
+label clear_151_2
+jzero @151 clear_151_2_end
+dec @151
+jzero .0 clear_151_2
+label clear_151_2_end
+dec @150
+inc *200
+jnzero @150 swap
+inc @200
+label swap_second
+dec @152
+inc *200
+jnzero @152 swap_second
+dec @200
+jzero .0 inner_loop
+
+label stop
+print *200
+dec @200
+jnzero @200 stop
+stop
